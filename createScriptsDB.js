@@ -1,14 +1,13 @@
 const express = require('express');
-const mssql = require('mssql');
+const sql = require('mssql');
 const PORT = 3001;
 
 const app = express();
 
 const sqlConfig = {
-    user: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    server: process.env.DB_HOSTNAME,
-    database:DB_NAME,
+    user: 'admin',
+    password: 'Fanta983038!',
+    server: 'hispiadb.crydgfoznh1m.ap-northeast-2.rds.amazonaws.com',
     pool: {
         max: 10,
         min: 0,
@@ -16,19 +15,19 @@ const sqlConfig = {
     }
 };
 
-const sql = new mssql.ConnectionPool(dbConfig);
+// const con = sql.createConnection(sqlConfig);
 
-app.get('/',function(req,res){
-    let connection = sql.connect(sqlConfig,(err)=>{
-        if(err){
-            console.log(err)
-        }else {
-            res.send('DB Connected');
-            //code for sql request here.
-        }
-    })
-})
-app.post('/users', (req, res) => {
+app.post('/create', (req, res) => {
+    sql.connect(sqlConfig,function(err) {
+        if (err) throw err;
+        sql.query('CREATE DATABASE IF NOT EXISTS main;');
+        sql.query('USE main;');
+        sql.query('CREATE TABLE IF NOT EXISTS users(id int NOT NULL AUTO_INCREMENT, username varchar(30), email varchar(255), age int, PRIMARY KEY(id));', function(error, result, fields) {
+            console.log(result);
+        });
+    });
+});
+app.post('/insert', (req, res) => {
     if (req.query.username && req.query.email && req.query.age) {
         console.log('Request received');
         sql.connect(sqlConfig,function(err) {
@@ -42,7 +41,6 @@ app.post('/users', (req, res) => {
         console.log('Missing a parameter');
     }
 });
-
 app.listen(PORT,function(){
     console.log(`Server started at ${PORT}`)
 })

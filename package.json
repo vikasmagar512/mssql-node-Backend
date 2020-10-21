@@ -4,7 +4,7 @@
   "description": "Connecting  Nodejs with SQL Server",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon app.js"
   },
   "keywords": [
     "nodejs",
@@ -15,5 +15,15 @@
   "devDependencies": {
     "express": "4.17.1",
     "mssql": "5.1.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "http-errors": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.5",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
   }
 }

@@ -1,0 +1,45 @@
+USE "dongil";
+CREATE TABLE [dbo].[users](
+ [userId] [int] NOT NULL,
+ [userName] [nvarchar](50) NULL,
+ [password] [nvarchar](50) NULL,
+ [usertype] [nvarchar](50) NULL,
+ [canEdit] [bit] NULL,
+ [canDelete] [bit] NULL,
+ [canCreate] [bit] NULL,
+ [canView] [bit] NULL,
+ CONSTRAINT [PK_users] PRIMARY KEY CLUSTERED 
+(
+ [userId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+INSERT [dbo].[users] ([userId], [userName], [password], [usertype], [canEdit], [canDelete], [canCreate], [canView]) VALUES (1, N'shashangka', N'12345', N'admin', 1, 1, 1, 1)
+INSERT [dbo].[users] ([userId], [userName], [password], [usertype], [canEdit], [canDelete], [canCreate], [canView]) VALUES (2, N'ishani', N'12345', N'editor', 0, 0, 1, 1)
+
+/****** Object: StoredProcedure [dbo].[GetUserAuthenticationNew] Script Date: 9/14/2018 11:38:36 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author: <Author,,Name>
+-- Create date: <Create Date,,>
+-- Description: <Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetUserAuthenticationNew]
+ -- Add the parameters for the stored procedure here
+ @username nvarchar(50),
+ @password nvarchar(50)
+AS
+BEGIN
+ -- SET NOCOUNT ON added to prevent extra result sets from
+ -- interfering with SELECT statements.
+ SET NOCOUNT ON;
+
+ -- Insert statements for procedure here
+ SELECT [userId],[userName],[usertype]--,[canEdit],[canDelete],[canCreate],[canView]
+ FROM [dbo].[users]
+ WHERE [userName] = @username AND [password] = @password
+END
+GO
