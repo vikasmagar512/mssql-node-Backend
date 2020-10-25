@@ -2,7 +2,7 @@ var passport = require('passport');
 var strategy = require('passport-local');
 var dbService = require('../data/dbService');
 let jwt = require('jsonwebtoken');
-const Config = require('../config')
+// const Config = require('../config')
 passport.use(new strategy({ session: false }, function (username, password, callback) {
     //Stored Procedure
     var query = "[GetUserAuthentication] '" + username + "', '" + password + "'";

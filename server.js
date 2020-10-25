@@ -1,3 +1,4 @@
+/*
 const express = require('express');
 const mssql = require('mssql');
 const PORT = 3001;
@@ -45,4 +46,4 @@ app.post('/users', (req, res) => {
 
 app.listen(PORT,function(){
     console.log(`Server started at ${PORT}`)
-})
+})*/

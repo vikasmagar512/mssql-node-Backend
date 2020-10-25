@@ -1,5 +1,5 @@
+/*
 module.exports = {
-    sqlConfig : {
         user: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         server: process.env.DB_HOSTNAME,
@@ -9,5 +9,7 @@ module.exports = {
             min: 0,
             idleTimeoutMillis: 30000
         }
-    }
+
+
 };
+*/
