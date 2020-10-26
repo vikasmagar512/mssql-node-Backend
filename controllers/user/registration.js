@@ -9,7 +9,7 @@ module.exports = {
         if (!reqBody.username || !reqBody.password || !reqBody.firstName || !reqBody.lastName || !reqBody.phone) {
             return response.errorResponse(res, "Required params missing", 204);
         }
-        let getRoleQuery = "SELECT * FROM role_master where role_name = 'customer'";
+        let getRoleQuery = "SELECT * FROM role_master where role_name = 'user'";
         dbService.executeQuery(getRoleQuery, function (roleData, err) {
             if (err) {
                 console.log("-------error------" + err);
@@ -32,7 +32,7 @@ module.exports = {
                             email_verification_link: process.env.API_URL + "/verify-email?username=" + reqBody.username + "&token=" + verificationToken
                         }
                         console.log(argument);
-                        // emailTemplate.emailVerification()
+                        emailTemplate.emailVerification(argument)
                         return response.successResponse(res, "Registered Successfully", [], 201);
                     }
                 });
