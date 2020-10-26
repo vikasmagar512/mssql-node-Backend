@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var passport = require('./passport');
 var jwt = require('jsonwebtoken');
+var registration = require('../controllers/user/registration');
+var roles_access = require('../controllers/user/roles_access');
 
 /* GET users listing. */
 // router.get('/', function (req, res, next) {
@@ -58,5 +60,7 @@ router.post('/verify-token', function (req, res, next) {
         res.send({data:{user:decoded}})
       })
 });
-
+router.route('/register').post(registration.registerUser);
+router.route('/roles').get(roles_access.getSystemRoles);
+router.route('/verify-email').get(registration.verifyEmail);
 module.exports = router;
