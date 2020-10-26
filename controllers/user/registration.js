@@ -15,10 +15,10 @@ module.exports = {
                 console.log("-------error------" + err);
                 return response.errorResponse(res, err, 500);
             } else {
-                let roleId = roleData.recordset[0].id;
+                let roleId = roleData.recordset[0].status;
                 const verificationToken = randomstring.generate(20);
                 let query = `INSERT INTO users (userName, password , firstName , lastName , phone, roleId ,isVerified , verificationToken ) VALUES
-         ('${reqBody.username}', '${reqBody.password}' ,'${reqBody.firstName}','${reqBody.lastName}','${reqBody.phone}' ,'${roleId}' ,0 ,'${verificationToken}')`;
+         ('${reqBody.username}', '${reqBody.password}' ,'${reqBody.firstName}','${reqBody.lastName}','${reqBody.phone}' ,'${roleId}' ,1 ,'${verificationToken}')`;
                 dbService.executeQuery(query, function (data, err) {
                     if (err) {
                         if (err.number == 2601) {
@@ -58,7 +58,8 @@ module.exports = {
                             response.errorResponse(res, "Your account could not be verified", 401);
                         } else {
                             console.log("verification successful");
-                            res.redirect(process.env.APP_URL + '/login');
+                            // res.redirect(process.env.APP_URL + '/login');
+                            response.successResponse(res,'Email verified',[],200)
                         }
                     });
                 }
