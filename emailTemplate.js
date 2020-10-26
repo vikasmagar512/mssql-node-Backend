@@ -41,7 +41,7 @@ emailVerification: function (argument){
                         '</tr>' +
                         '<tr style="font-family:  "Helvetica Neue",Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
                         '<td class="content-block" style="font-family:  "Helvetica Neue",Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">' +
-                        'Thank you for registering with us ! . Please click on the below email to verify your account ' +
+                        'Thank you for registering with us ! . Please click on the below link to verify your account ' +
                         '</td>' +
                         '</tr>' +
                         '<tr style="font-family:  "Helvetica Neue",Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
