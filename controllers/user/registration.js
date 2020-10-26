@@ -15,7 +15,7 @@ module.exports = {
                 console.log("-------error------" + err);
                 return response.errorResponse(res, err, 500);
             } else {
-                let roleId = roleData.recordset[0].status;
+                let roleId = roleData.recordset[0].id;
                 const verificationToken = randomstring.generate(20);
                 let query = `INSERT INTO users (userName, password , firstName , lastName , phone, roleId ,isVerified , verificationToken ) VALUES
          ('${reqBody.username}', '${reqBody.password}' ,'${reqBody.firstName}','${reqBody.lastName}','${reqBody.phone}' ,'${roleId}' ,1 ,'${verificationToken}')`;
