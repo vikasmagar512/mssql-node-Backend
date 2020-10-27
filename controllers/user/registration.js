@@ -18,7 +18,7 @@ module.exports = {
                 let roleId = roleData.recordset[0].id;
                 const verificationToken = randomstring.generate(20);
                 let query = `INSERT INTO users (userName, password , firstName , lastName , phone, roleId ,isVerified , verificationToken ) VALUES
-         ('${reqBody.username}', '${reqBody.password}' ,'${reqBody.firstName}','${reqBody.lastName}','${reqBody.phone}' ,'${roleId}' ,1 ,'${verificationToken}')`;
+         ('${reqBody.username}', '${reqBody.password}' ,'${reqBody.firstName}','${reqBody.lastName}','${reqBody.phone}' ,'${roleId}' ,0 ,'${verificationToken}')`;
                 dbService.executeQuery(query, function (data, err) {
                     if (err) {
                         if (err.number == 2601) {
@@ -29,9 +29,8 @@ module.exports = {
                     } else {
                         let argument = {
                             toEmail: reqBody.username,
-                            email_verification_link: process.env.API_URL + "/verify-email?username=" + reqBody.username + "&token=" + verificationToken
+                            email_verification_link: process.env.API_URL + "/api/auth/verify-email?username=" + reqBody.username + "&token=" + verificationToken
                         }
-                        console.log(argument);
                         emailTemplate.emailVerification(argument)
                         return response.successResponse(res, "Registered Successfully", [], 201);
                     }
@@ -58,8 +57,8 @@ module.exports = {
                             response.errorResponse(res, "Your account could not be verified", 401);
                         } else {
                             console.log("verification successful");
-                            // res.redirect(process.env.APP_URL + '/login');
-                            response.successResponse(res,'Email verified',[],200)
+                             res.redirect(process.env.APP_URL + '/login');
+                            //response.successResponse(res,'Email verified',[],200)
                         }
                     });
                 }
