@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var attendance = require('../controllers/attendence/attendence');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -9,4 +10,5 @@ router.get('/', function (req, res, next) {
   // , { title: 'Welcome to ExpressJS + Passport + JSON Web Token (JWT)', user: loggeduser });
 });
 
+router.route('/save-attendance').post(attendance.addAttendance);
 module.exports = router;
